@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Leaf</title>
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script>
+        if (!localStorage.getItem('logged')) {
+            window.location.href = './index.html'
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img onClick="loggout()" src="./img/Leaf Main Logo.png" height="40px" alt="">
+        </div>
+        <div class="client-name"><span id="client-name"> Client Name</span></div>
+    </header>
+    <div class="container">
+        <div class="cell">
+            <div class="title">Publish User CN...</div>
+            <div class="graphic">
+                <div id="chart_1"></div>
+            </div>
+            <div class="footer"><small>
+                    <div class="span-error-rate"></div> Errors rate(%)
+                </small></div>
+        </div>
+        <div class="cell">
+            <div class="title">Publish User - Jo...</div>
+            <div class="graphic">
+                <div id="chart_2"></div>
+            </div>
+            <div class="footer"><small>
+                    <div class="span-error-rate"></div> Errors rate(%)
+                </small></div>
+        </div>
+        <div class="cell">
+            <div class="title">Publish User - Trimble - Error and Succ...</div>
+            <div class="graphic">
+                <div id="chart_3"></div>
+            </div>
+            <div class="footer"><small>
+                    <div class="span-error-rate"></div> Errors rate(%)
+                </small></div>
+        </div>
+        <div class="cell">
+            <div class="title">Publish User - CFV - Error and success</div>
+            <div class="graphic">
+                <div id="chart_4"></div>
+            </div>
+            <div class="footer"><small>
+                    <div class="span-error-rate"></div> Errors rate(%)
+                </small></div>
+        </div>
+        <div class="cell">
+            <div class="title">Operation processing - CPUUtilization</div>
+            <div class="graphic">
+                <div id="chart_5"></div>
+            </div>
+        </div>
+        <div class="cell">
+            <div class="title">Operatins processing - MemoryUtilization</div>
+            <div class="graphic">
+                <div id="chart_6"></div>
+            </div>
+        </div>
+        <div class="big-cell">
+            <div class="title text-start">Number Of Notifications Delivered Sum</div>
+            <div class="graphic">
+                <div id="chart_7"></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    function loggout() {
+        localStorage.removeItem('logged')
+        window.location.href = "index.html";
+    }
+    const name = localStorage.getItem('logged')
+    document.getElementById("client-name").innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart1);
+    google.charts.setOnLoadCallback(drawChart2);
+    google.charts.setOnLoadCallback(drawChart3);
+    google.charts.setOnLoadCallback(drawChart4);
+    google.charts.setOnLoadCallback(drawChart5);
+    google.charts.setOnLoadCallback(drawChart6);
+    google.charts.setOnLoadCallback(drawChart7);
+
+
+
+
+    function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+            ['', '', ''],
+            ['19:20', 1, 0],
+
+        ]);
+
+        var options = {
+            width: 400,
+            title: 'Count',
+            hAxis: { colors: ['#0F876E'], minValue: 0, maxValue: 99 },
+            vAxis: { minValue: 0, maxValue: 1 },
+            legend: 'none',
+            colors: ['#0F876E', '#EE3B3B']
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_1'));
+
+        chart.draw(data, options);
+    }
+
+    function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Work', 10],
+        ]);
+
+        var options = {
+            legend: 'none',
+            width: 300,
+            pieHole: 0.5,
+            colors: ['#0F876E'],
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_2'));
+        chart.draw(data, options);
+    }
+
+    function drawChart3() {
+        var data = google.visualization.arrayToDataTable([
+            ['Year', 'Sales', 'Expenses'],
+            ['17:00', 1, 0],
+            ['18:00', 1, 0],
+            ['19:00', 1, 0],
+
+        ]);
+
+        var options = {
+            width: 400,
+            title: 'Count',
+            hAxis: { colors: ['#0F876E'], minValue: 0, maxValue: 99 },
+            vAxis: { minValue: 0, maxValue: 1 },
+            legend: 'none',
+            colors: ['#0F876E', '#EE3B3B']
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_3'));
+
+        chart.draw(data, options);
+    }
+
+    function drawChart4() {
+        var data = google.visualization.arrayToDataTable([
+            ['', '', ''],
+            ['17:50', 1, 0],
+
+        ]);
+
+        var options = {
+            width: 400,
+            title: 'Count',
+            hAxis: { colors: ['#0F876E'], minValue: 0, maxValue: 99 },
+            vAxis: { minValue: 0, maxValue: 1 },
+            legend: 'none',
+            colors: ['#0F876E', '#EE3B3B']
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_4'));
+
+        chart.draw(data, options);
+    }
+
+    function drawChart5() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Dogs');
+
+        data.addRows([
+            [0, 0], [1, 70], [2, 20], [3, 40], [4, 80], [5, 9],
+            [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
+            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
+            [18, 52], [19, 20], [20, 42], [21, 90], [22, 56], [23, 57],
+            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
+            [30, 55], [31, 60], [32, 61], [33, 10], [34, 62], [35, 65],
+            [36, 62], [37, 58], [38, 55], [39, 61], [40, 80], [41, 10],
+            [42, 63], [43, 90], [44, 67], [45, 69], [46, 69], [47, 70],
+            [48, 72], [49, 68], [50, 66], [51, 20], [52, 67], [53, 70],
+            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
+            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
+            [66, 70], [67, 72], [68, 75], [69, 80]
+        ]);
+
+        var options = {
+            legend: 'none',
+            vAxis: {
+                title: 'Percent'
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_5'));
+
+        chart.draw(data, options);
+    }
+
+    function drawChart6() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Dogs');
+
+        data.addRows([
+            [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
+            [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
+            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
+            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
+            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
+            [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
+            [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
+            [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
+            [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
+            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
+            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
+            [66, 70], [67, 72], [68, 75], [69, 80]
+        ]);
+
+        var options = {
+            legend: 'none',
+            vAxis: {
+                title: 'Percent'
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_6'));
+
+        chart.draw(data, options);
+    }
+
+    function drawChart7() {
+        var data = google.visualization.arrayToDataTable([
+            ['Time', 'jh-operations-files-fields-fil', 'jh-operations-service-topic-prd'],
+            ['16:30', 16300, 2],
+            ['17:00', 10400, 2],
+            ['17:30', 20000, 2],
+            ['18:00', 8000, 2],
+            ['18:30', 400, 2],
+            ['19:00', 16300, 2],
+            ['19:30', 16300, 2],
+        ]);
+
+        var options = {
+            width: 800,
+            title: 'Count',
+            colors: ['#0F876E', '#EE3B3B']
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_7'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+</html>

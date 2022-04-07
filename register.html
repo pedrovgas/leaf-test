@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Leaf</title>
+    <link rel="stylesheet" href="css/register.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="container-header">
+                <img src="./img/Leaf Main Logo White.png" height="80px" alt="">
+            </div>
+            <div class="container-body">
+                <div class="white-box">
+                    <h1>Criar conta</h1>
+                    <form id="register-form">
+                        <div class="user-input-wrp" id="field_login">
+                            <input type="text" id="login" class="inputText" required />
+                            <span class="floating-label">Login</span>
+                        </div>
+                        <div class="user-input-wrp" id="field_pass">
+                            <input type="password" id="pass" class="inputText" required />
+                            <span class="floating-label">Senha</span>
+                        </div>
+                        <div class="user-input-wrp" id="field_confirm_pass">
+                            <input type="password" id="confirm_pass" class="inputText" required />
+                            <span class="floating-label">Confirmar Senha</span>
+                        </div>
+                        <input type="submit" value="Cadastrar">
+                    </form>
+                    <div class="container-footer">
+                        <a href="index.html" class="link">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function registerUser(user) {
+        var users = JSON.parse(localStorage.getItem('users'))
+        if (user) {
+            if (users) {
+                for (let i = 0; i < users.length; i++) {
+                    const e = users[i];
+                    user.id = e.id + 1;
+                    if (user.usuario == e.usuario) {
+                        alert('Usuário já existente!')
+                        return false;
+                    }
+                }
+                users.push(user);
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Usuário cadastrado!')
+                window.location.href = './index.html';
+            } else {
+                var users = [];
+                user.id = 1;
+                users.push(user);
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Usuário cadastrado!')
+                window.location.href = './index.html';
+            }
+
+        }
+    }
+    $(document).ready(function () {
+        $('#register-form').submit(function (e) {
+            e.preventDefault()
+            if ($('#pass').val() != $('#confirm_pass').val()) {
+                alert('Senhas não coincidem!')
+                $('#field_pass, #field_confirm_pass').addClass('danger');
+            } else {
+                $('#field_pass, #field_confirm_pass').removeClass('danger');
+                const user = {
+                    usuario: $('#login').val(),
+                    senha: $('#pass').val()
+                }
+                registerUser(user);
+            }
+        });
+    });
+</script>
+
+</html>

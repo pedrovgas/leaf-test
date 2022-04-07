@@ -1,0 +1,35 @@
+@import url('satoshi.css');
+
+:root {
+    --main-color: #0F876E;
+    --accent-color: #33CC99;
+    --h1-size: 32pt;
+    --h1-color: #1F1F1F;
+    --body-size: 16pt;
+    --body-min-size: 13pt;
+    --border-color: #E1E1E1;
+    --body-color: #777777;
+    --light-color: #FFFFFF;
+    --danger-color: #EE3B3B;
+}
+
+body,
+html {
+    font-family: 'Satoshi-Variable', sans-serif;
+    font-size: var(--body-size);
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Fade animation */
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
